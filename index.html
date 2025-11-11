@@ -2,53 +2,58 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Бамбу — Сервис-бук</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Сервис-бук Бамбу</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     html {
       scroll-behavior: smooth;
+      font-size: 16px;
     }
 
     body {
       font-family: 'Montserrat', sans-serif;
       background-color: #ffffff;
       color: #222;
-      margin: 0;
-      line-height: 1.6;
-      font-size: 16px;
+      line-height: 1.5;
     }
 
-    @media (max-width: 768px) {
-      body {
-        font-size: 15px;
-        line-height: 1.5;
-      }
+    /* Адаптация под малые экраны */
+    @media (max-width: 480px) {
+      html { font-size: 15px; }
+      h1 { font-size: 1.7rem; }
+      h2 { font-size: 1.4rem; }
+      section { margin-bottom: 2rem; }
     }
 
+    @media (min-width: 768px) {
+      html { font-size: 18px; }
+      body { line-height: 1.6; }
+    }
+
+    /* ШАПКА: компактная, липкая, чистая */
     header {
       position: sticky;
       top: 0;
       background: white;
-      z-index: 999;
+      z-index: 1000;
       border-bottom: 1px solid #eee;
-    }
-
-    .nav-container {
+      padding: 0.5rem 1rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0.8rem 1.2rem;
     }
 
     .brand {
       font-weight: 600;
       color: #8BC34A;
-      font-size: 1.4rem;
+      font-size: 1.2rem;
     }
 
     .menu-toggle {
@@ -70,33 +75,24 @@
       .menu-toggle {
         display: flex;
       }
-
-      nav ul {
-        display: none;
-      }
     }
 
-    nav {
-      position: sticky;
-      top: 0;
-      background: white;
-      z-index: 999;
-      border-bottom: 1px solid #eee;
-    }
-
+    /* БОКОВОЕ МЕНЮ */
     .nav-menu {
       position: fixed;
       top: 0;
       right: 0;
+      width: 80%;
+      max-width: 320px;
       height: 100vh;
-      width: 70%;
       background: rgba(255, 255, 255, 0.98);
-      box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+      backdrop-filter: blur(4px);
+      box-shadow: -4px 0 20px rgba(0,0,0,0.15);
       transform: translateX(100%);
-      transition: transform 0.3s ease;
-      padding: 2rem 1.5rem;
-      z-index: 1001;
+      transition: transform 0.35s ease;
+      padding: 3rem 1.5rem 2rem;
       overflow-y: auto;
+      z-index: 1001;
     }
 
     .nav-menu.open {
@@ -105,21 +101,23 @@
 
     .nav-menu a {
       display: block;
-      padding: 0.8rem 0;
+      padding: 0.9rem 0;
       font-size: 1rem;
       text-decoration: none;
       color: #222;
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid #f0f0f0;
+      font-weight: 500;
     }
 
     .nav-menu a:hover {
       color: #8BC34A;
     }
 
+    /* ЗАТЕМНЕНИЕ ФОНА */
     .nav-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.3);
+      background: rgba(0,0,0,0.4);
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.3s ease;
@@ -131,193 +129,138 @@
       pointer-events: all;
     }
 
+    /* ОСНОВНОЙ КОНТЕНТ */
     main {
-      max-width: 700px;
+      max-width: 720px;
       margin: 0 auto;
-      padding: 0 1.2rem;
-    }
-
-    @media (max-width: 768px) {
-      main {
-        padding-top: 5rem;
-      }
+      padding: 1rem;
     }
 
     section {
-      margin-bottom: 3.5rem;
-    }
-
-    @media (max-width: 768px) {
-      section {
-        margin-top: 2rem;
-        margin-bottom: 2rem;
-      }
-    }
-
-    h1, h2, h3 {
-      color: #8BC34A;
+      margin-bottom: 2.5rem;
     }
 
     h1 {
       text-align: center;
-      font-size: 1.9rem;
+      font-size: 1.8rem;
       margin-bottom: 1.2rem;
+      color: #8BC34A;
       font-weight: 600;
     }
 
     h2 {
-      margin-top: 2.5rem;
-      font-size: 1.5rem;
-      border-bottom: 1px dashed #ccc;
-      padding-bottom: 0.5rem;
+      font-size: 1.4rem;
+      color: #8BC34A;
+      margin: 1.8rem 0 0.8rem;
+      border-bottom: 1px dashed #ddd;
+      padding-bottom: 0.4rem;
     }
 
     h3 {
-      font-size: 1.2rem;
-      margin-top: 1.5rem;
+      font-size: 1.1rem;
+      color: #333;
+      margin: 1.2rem 0 0.6rem;
     }
 
     p, li {
-      margin-bottom: 0.8rem;
+      margin-bottom: 0.6rem;
+      font-size: 0.95rem;
     }
 
-    ul {
-      padding-left: 1.5rem;
+    ul, ol {
+      padding-left: 1.4rem;
+      margin: 0.6rem 0;
     }
 
-    ol {
-      padding-left: 1.8rem;
-    }
-
+    /* ЦИТАТЫ */
     .quote {
+      background: #f8f8f8;
       border-left: 4px solid #8BC34A;
-      padding: 1rem 1rem 1rem 1.5rem;
-      margin: 1.5rem 0;
-      background-color: #f9f9f9;
+      padding: 0.8rem 1rem;
+      margin: 1.2rem 0;
       font-style: italic;
-      color: #444;
-      font-size: 1.05rem;
+      font-size: 0.95rem;
+      color: #555;
     }
 
+    /* ТАБЛИЦЫ */
     table {
       width: 100%;
       border-collapse: collapse;
       margin: 1rem 0;
-    }
-
-    table, th, td {
-      border: 1px solid #ddd;
+      font-size: 0.9rem;
     }
 
     th, td {
-      padding: 0.6rem;
+      padding: 0.5rem;
+      border: 1px solid #ddd;
       text-align: left;
     }
 
     th {
       background-color: #f0f0f0;
+      font-weight: 500;
     }
 
-    .footer {
-      text-align: center;
-      margin-top: 4rem;
-      padding: 2rem 0;
-      color: #666;
-      font-size: 0.95rem;
-    }
-
+    /* КНОПКА ЗАКАЗА */
     .btn-order {
       display: inline-block;
-      margin: 1rem 0;
-      padding: 0.8rem 1.5rem;
+      margin: 1.2rem 0;
+      padding: 0.8rem 1.4rem;
       background-color: #8BC34A;
       color: white;
-      font-weight: 500;
       text-decoration: none;
-      border-radius: 6px;
+      border-radius: 8px;
+      font-weight: 500;
       font-size: 1rem;
+      text-align: center;
     }
 
     .btn-order:hover {
       background-color: #7cb342;
     }
+
+    /* ПОДВАЛ */
+    .footer {
+      text-align: center;
+      padding: 2rem 1rem 1rem;
+      color: #999;
+      font-size: 0.85rem;
+    }
+
+    /* УБРАТЬ "ПРОКРУТКУ ВВЕРХ" НА iOS */
+    @supports (-webkit-touch-callout: none) {
+      body {
+        overscroll-behavior-y: contain;
+      }
+    }
   </style>
-  <script>
-    document.addEventListener('DOMContentLoaded', function(){
-      const menuToggle = document.querySelector('.menu-toggle');
-      const navMenu = document.querySelector('.nav-menu');
-      const navOverlay = document.querySelector('.nav-overlay');
-
-      function openMenu() {
-        navMenu.classList.add('open');
-        navOverlay.classList.add('show');
-        document.body.style.overflow = 'hidden';
-      }
-
-      function closeMenu() {
-        navMenu.classList.remove('open');
-        navOverlay.classList.remove('show');
-        document.body.style.overflow = '';
-      }
-
-      menuToggle.addEventListener('click', function() {
-        if (navMenu.classList.contains('open')) {
-          closeMenu();
-        } else {
-          openDialog();
-        }
-      });
-
-      navOverlay.addEventListener('click', closeMenu);
-
-      // Закрытие по Esc
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && navMenu.classList.contains('open')) {
-          closeMenu();
-        }
-      });
-    });
-  </script>
 </head>
 <body>
 
+<!-- ШАПКА -->
 <header>
-  <div class="nav-container">
-    <div class="brand">Бамбу</div>
-    <div class="menu-toggle">
-      <span></span><span></span><span></span>
-    </div>
-    <nav>
-      <ul>
-        <li><a href="#philosophy">Философия</a></li>
-        <li><a href="#sales">Продажи</a></li>
-        <li><a href="#order">Порядок</a></li>
-        <li><a href="#clean">Чистота</a></li>
-        <li><a href="#team">Команда</a></li>
-        <li><a href="#discipline">Дисциплина</a></li>
-        <li><a href="#delays">Задержки</a></li>
-        <li><a href="#supplies">Закупки</a></li>
-        <li><a href="#manifest">Манифест</a></li>
-      </ul>
-    </nav>
+  <div class="brand">Бамбу</div>
+  <div class="menu-toggle" id="menuToggle">
+    <span></span><span></span><span></span>
   </div>
 </header>
 
-<!-- Боковое меню -->
-<div class="nav-menu">
-  <a href="#philosophy">Философия</a>
-  <a href="#sales">Продажи</a>
-  <a href="#order">Порядок</a>
-  <a href="#clean">Чистота</a>
-  <a href="#team">Команда</a>
-  <a href="#discipline">Дисциплина</a>
-  <a href="#delays">Задержки</a>
-  <a href="#supplies">Закупки</a>
-  <a href="#manifest">Манифест</a>
+<!-- БОКОВОЕ МЕНЮ -->
+<div class="nav-menu" id="navMenu">
+  <a href="#philosophy" onclick="closeMenu()">Философия</a>
+  <a href="#sales" onclick="closeMenu()">Продажи</a>
+  <a href="#order" onclick="closeMenu()">Порядок</a>
+  <a href="#clean" onclick="closeMenu()">Чистота</a>
+  <a href="#team" onclick="closeMenu()">Команда</a>
+  <a href="#discipline" onclick="closeMenu()">Дисциплина</a>
+  <a href="#delays" onclick="closeMenu()">Задержки</a>
+  <a href="#supplies" onclick="closeMenu()">Закупки</a>
+  <a href="#manifest" onclick="closeMenu()">Манифест</a>
 </div>
 
-<!-- Overlay -->
-<div class="nav-overlay"></div>
+<!-- ЗАТЕМНЕНИЕ -->
+<div class="nav-overlay" id="navOverlay" onclick="closeMenu()"></div>
 
 <main>
 
@@ -823,103 +766,89 @@
   <p>Все точки работают по единому стандарту. Каждый сотрудник отвечает за своевременный контроль остатков и оформление заказов заранее, а не по факту отсутствия товара. Все заявки оформляются через онлайн-форму и фиксируются в группе «Закупки».</p>
 
   <table>
-    <tr><th>День оформления заказа</th><th>Кто делает заказ</th><th>День доставки</th></tr>
-    <tr><td>Воскресенье (ночная смена)</td><td>Бариста проверяет остатки и делает заказ</td><td>Понедельник</td></tr>
-    <tr><td>Вторник (ночная смена)</td><td>Бариста проверяет остатки и делает заказ</td><td>Среда</td></tr>
-    <tr><td>Пятница (ночная смена)</td><td>Бариста проверяет остатки и делает заказ</td><td>Суббота</td></tr>
+    <tr><th>День</th><th>Кто делает</th><th>Доставка</th></tr>
+    <tr><td>Воскресенье (ночь)</td><td>Бариста проверяет и делает заказ</td><td>Понедельник</td></tr>
+    <tr><td>Вторник (ночь)</td><td>Бариста проверяет и делает заказ</td><td>Среда</td></tr>
+    <tr><td>Пятница (ночь)</td><td>Бариста проверяет и делает заказ</td><td>Суббота</td></tr>
   </table>
 
   <h3>Порядок действий</h3>
   <ol>
-    <li>Проверка остатков. В конце ночной смены бариста проверяет все категории: продукты, напитки, расходники, сиропы, посуду, чековую ленту.</li>
+    <li>Проверка остатков. В конце ночной смены бариста проверяет все категории.</li>
     <li>Если достигнут минимальный остаток — оформить заказ через форму.</li>
-    <li>После оформления заказа — написать сообщение в группу: «Заказ сформирован. Точка — Бамбу.» или «Заказ сформирован. Точка — Джекс.»</li>
-    <li>После доставки — сверить количество, качество и обновить остатки в учёте.</li>
+    <li>После оформления — написать в чат: «Заказ сформирован. Точка — Бамбу.» или «Заказ сформирован. Точка — Джекс.»</li>
+    <li>После доставки — сверить количество и качество.</li>
   </ol>
 
   <a href="https://forms.yandex.ru/u/68e531a8eb614654702b7962" target="_blank" class="btn-order">Оформить заказ</a>
 
-  <h3>Минимальные остатки по категориям</h3>
+  <h3>Минимальные остатки</h3>
   <p><strong>Молоко</strong></p>
   <table>
-    <tr><th>Вид</th><th>Минимальный остаток</th><th>Примечание</th></tr>
-    <tr><td>Обычное молоко</td><td>20 литров (2 коробки) + запас в холодильнике</td><td>Заказ при достижении минимума</td></tr>
-    <tr><td>Кокосовое молоко</td><td>3 литра</td><td>Альтернатива, держать в запасе</td></tr>
-    <tr><td>Миндальное молоко</td><td>2 литра</td><td>Альтернатива, держать в запасе</td></tr>
-    <tr><td>Банановое молоко</td><td>2 литра</td><td>Альтернатива, держать в запасе</td></tr>
+    <tr><th>Вид</th><th>Остаток</th><th>Примечание</th></tr>
+    <tr><td>Обычное</td><td>20 л (2 коробки)</td><td>+</td></tr>
+    <tr><td>Кокосовое</td><td>3 л</td><td>Альтернатива</td></tr>
+    <tr><td>Миндальное</td><td>2 л</td><td>Альтернатива</td></tr>
+    <tr><td>Банановое</td><td>2 л</td><td>Альтернатива</td></tr>
   </table>
 
   <p><strong>Вода</strong></p>
   <table>
-    <tr><th>Вид</th><th>Где хранится</th><th>Минимальный остаток</th><th>Примечание</th></tr>
-    <tr><td>19 л бутыли</td><td>Склад в кофейне Бамбу</td><td>4 бутыли</td><td>Заказать при достижении минимума</td></tr>
-    <tr><td>0,5 л бутылки</td><td>На каждой точке</td><td>При открытии 5-й упаковки — заказать +10</td><td>Вода должна быть всегда в запасе</td></tr>
-    <tr><td>1 л бутылки</td><td>На каждой точке</td><td>3 упаковки</td><td>При расходовании — заказать +6</td></tr>
+    <tr><th>Вид</th><th>Где</th><th>Остаток</th></tr>
+    <tr><td>19 л</td><td>Склад Бамбу</td><td>4 бутыли</td></tr>
+    <tr><td>0,5 л</td><td>На точке</td><td>При открытии 5-й — +10</td></tr>
+    <tr><td>1 л</td><td>На точке</td><td>3 упаковки</td></tr>
   </table>
 
   <p><strong>Кофе и чай</strong></p>
   <table>
-    <tr><th>Категория</th><th>Минимальный остаток</th><th>Примечание</th></tr>
-    <tr><td>Кофе зёрна</td><td>5 кг</td><td>Контролировать ежедневно</td></tr>
-    <tr><td>Чай (чёрный / зелёный)</td><td>Меньше половины коробки — заказ</td><td>Поддерживать запас заранее</td></tr>
-    <tr><td>Сиропы</td><td>Меньше половины бутылки — заказ новой</td><td>Проверять наличие по каждому вкусу</td></tr>
+    <tr><th>Категория</th><th>Минимум</th></tr>
+    <tr><td>Кофе зёрна</td><td>5 кг</td></tr>
+    <tr><td>Чай</td><td>Меньше половины коробки</td></tr>
+    <tr><td>Сиропы</td><td>Меньше половины бутылки</td></tr>
   </table>
 
-  <p><strong>Сладости и снеки</strong></p>
+  <p><strong>Сладости</strong></p>
   <table>
-    <tr><th>Категория</th><th>Минимальный остаток</th><th>Примечание</th></tr>
-    <tr><td>Snickers, Twix, Mars, Ritter Sport, Bounty, маленький Snickers и др.</td><td>При вскрытии последней коробки — заказать 2 коробки</td><td>Контролировать при выкладке</td></tr>
-    <tr><td>Жвачка</td><td>При вскрытии последней упаковки — заказать 2 упаковки</td><td>—</td></tr>
+    <tr><th>Категория</th><th>Остаток</th></tr>
+    <tr><td>Сэндвичи, батончики</td><td>При вскрытии последней — заказать 2</td></tr>
+    <tr><td>Жвачка</td><td>При вскрытии последней — заказать 2</td></tr>
   </table>
 
-  <p><strong>Расходные материалы</strong></p>
+  <p><strong>Расходники</strong></p>
   <table>
-    <tr><th>Категория</th><th>Минимальный остаток</th><th>Где хранится</th><th>Примечание</th></tr>
-    <tr><td>Салфетки</td><td>5 пачек</td><td>Склад в Бамбу</td><td>Заказ при достижении минимума</td></tr>
-    <tr><td>Чековая лента</td><td>Меньше половины упаковки — заказать новую</td><td>—</td><td>Проверять ежедневно при закрытии смены</td></tr>
+    <tr><th>Пункт</th><th>Минимум</th><th>Где</th></tr>
+    <tr><td>Салфетки</td><td>5 пачек</td><td>Склад Бамбу</td></tr>
+    <tr><td>Чековая лента</td><td>Меньше половины — новая</td><td>—</td></tr>
   </table>
 
   <p><strong>Напитки 0,5 л</strong></p>
   <table>
-    <tr><th>Вид</th><th>Минимальный остаток</th></tr>
-    <tr><td>Вода 0,5 л</td><td>При открытии 5-й упаковки — заказать +10</td></tr>
-    <tr><td>Coca-Cola 0,5 л</td><td>3 ящика</td></tr>
-    <tr><td>Fanta 0,5 л</td><td>3 ящика</td></tr>
-    <tr><td>Lipton (все виды)</td><td>2 упаковки каждого</td></tr>
-    <tr><td>Coca-Cola (жестяная банка)</td><td>Меньше половины упаковки — заказ</td></tr>
-    <tr><td>Mojito</td><td>Меньше половины упаковки — заказ</td></tr>
-    <tr><td>Энергетики</td><td>Меньше 1 ящика (12 банок) — заказ</td></tr>
+    <tr><th>Вид</th><th>Остаток</th></tr>
+    <tr><td>Вода</td><td>При открытии 5-й — +10</td></tr>
+    <tr><td>Coca-Cola</td><td>3 ящика</td></tr>
+    <tr><td>Fanta</td><td>3 ящика</td></tr>
+    <tr><td>Lipton</td><td>2 упаковки</td></tr>
+    <tr><td>Энергетики</td><td>Меньше 1 ящика — заказ</td></tr>
   </table>
 
-  <p><strong>Напитки 1 литр</strong></p>
+  <p><strong>Одноразовая посуда</strong></p>
   <table>
-    <tr><th>Вид</th><th>Минимальный остаток</th></tr>
-    <tr><td>Вода 1 л</td><td>3 ящика</td></tr>
-    <tr><td>Coca-Cola 1 л</td><td>2 ящика</td></tr>
-    <tr><td>Fanta 1 л</td><td>2 ящика</td></tr>
+    <tr><th>Пункт</th><th>Остаток</th><th>Примечание</th></tr>
+    <tr><td>Стаканы 350/250/500 мл</td><td>8 упаковок</td><td>Каждый размер</td></tr>
+    <tr><td>Эспрессо</td><td>5 упаковок</td><td>Без крышек</td></tr>
+    <tr><td>Крышки</td><td>1:1 к стаканам</td><td>Заказ при минимуме</td></tr>
+    <tr><td>Вилки/ложки/ножи</td><td>5 упаковок</td><td>Каждое</td></tr>
+    <tr><td>Трубочки</td><td>2 упаковки</td><td>—</td></tr>
+    <tr><td>Чековая лента</td><td>Меньше половины — новая</td><td>—</td></tr>
   </table>
 
-  <p><strong>Одноразовая посуда и инвентарь</strong></p>
+  <p><strong>Запасы на задержку</strong></p>
   <table>
-    <tr><th>Категория</th><th>Минимальный остаток</th><th>Примечание</th></tr>
-    <tr><td>Стаканы 350 мл (кофе)</td><td>8 упаковок</td><td>Для латте, капучино, американо.</td></tr>
-    <tr><td>Стаканы 250 мл (кофе)</td><td>8 упаковок</td><td>Для напитков среднего объёма.</td></tr>
-    <tr><td>Стаканы прозрачные 500 мл</td><td>8 упаковок</td><td>Для холодных напитков, лимонадов и авторских коктейлей.</td></tr>
-    <tr><td>Стаканы для эспрессо</td><td>5 упаковок</td><td>Без крышек.</td></tr>
-    <tr><td>Крышки для 350, 500 и 250 мл стаканов</td><td>1:1 к количеству стаканов</td><td>Заказ при достижении минимума.</td></tr>
-    <tr><td>Палочки-мешалки</td><td>2 упаковки</td><td>Проверять ежедневно.</td></tr>
-    <tr><td>Вилки / ложки / ножи</td><td>5 упаковок каждого вида</td><td>Для блюд и десертов при задержках.</td></tr>
-    <tr><td>Трубочки</td><td>2 упаковки</td><td>Для холодных напитков.</td></tr>
-    <tr><td>Пакеты фасовочные</td><td>1 полная упаковка</td><td>Для фасовки еды.</td></tr>
-    <tr><td>Чековая лента</td><td>Меньше половины упаковки — заказ новой</td><td>Проверять ежедневно.</td></tr>
-  </table>
-
-  <p><strong>Запасы продуктов на задержку</strong></p>
-  <table>
-    <tr><th>Категория</th><th>Минимальный остаток</th><th>Условия хранения</th><th>Примечание</th></tr>
-    <tr><td>Круассаны 7 Days (готовые, индивидуальная упаковка)</td><td>8 коробок</td><td>На складе, сухое прохладное место</td><td>Готовы к выдаче, длительный срок хранения.</td></tr>
-    <tr><td>Грилаты (замороженные)</td><td>6 коробок</td><td>В морозильной камере</td><td>Разогреваются в пароконвектомате по необходимости.</td></tr>
-    <tr><td>Вода без газа 0,5 л</td><td>12 упаковок</td><td>Секция «Задержки» на складе</td><td>Для выдачи при задержках рейсов.</td></tr>
+    <tr><th>Категория</th><th>Остаток</th><th>Хранение</th></tr>
+    <tr><td>Круассаны 7 Days</td><td>8 коробок</td><td>Склад</td></tr>
+    <tr><td>Грилаты</td><td>6 коробок</td><td>Морозильник</td></tr>
+    <tr><td>Вода 0,5 л</td><td>12 упаковок</td><td>Секция «Задержки»</td></tr>
   </table>
 
   <div class="quote">Порядок — это забота. Заблаговременность — профессионализм</div>
@@ -958,9 +887,41 @@
 </section>
 
 <div class="footer">
-  Обновлено: 10 ноября 2025 | Внутренний документ Бамбу
+  Обновлено: 10 ноября 2025 | Внутренний документ
 </div>
 
-</main>
+<script>
+  const menuToggle = document.getElementById('menuToggle');
+  const navMenu = document.getElementById('navMenu');
+  const navOverlay = document.getElementById('navOverlay');
+
+  function openMenu() {
+    navMenu.classList.add('open');
+    navOverlay.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMenu() {
+    navMenu.classList.remove('open');
+    navOverlay.classList.remove('show');
+    document.body.style.overflow = '';
+  }
+
+  menuToggle.addEventListener('click', () => {
+    if (navMenu.classList.contains('open')) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  });
+
+  // Закрытие по Esc
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && navMenu.classList.contains('open')) {
+      closeMenu();
+    }
+  });
+</script>
+
 </body>
 </html>
